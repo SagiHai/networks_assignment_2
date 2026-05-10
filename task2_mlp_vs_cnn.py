@@ -1,8 +1,3 @@
-# ============================================================
-# TASK 2: CNN vs MLP Comparison
-# Run AFTER task1_cnn_debug.py (reuses the dataset)
-# ============================================================
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
