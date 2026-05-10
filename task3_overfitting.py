@@ -1,9 +1,3 @@
-# ============================================================
-# TASK 3: Overfitting Analysis
-# We train a big model with no regularisation to cause
-# overfitting, then compare Dropout vs Early Stopping as fixes.
-# ============================================================
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
