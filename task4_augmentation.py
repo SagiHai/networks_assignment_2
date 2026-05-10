@@ -1,9 +1,3 @@
-# ============================================================
-# TASK 4: Data Augmentation
-# Shows each transform visually, then compares test accuracy
-# with vs without augmentation.
-# ============================================================
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
