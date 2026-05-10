@@ -1,14 +1,3 @@
-# ============================================================
-# TASK 1: CNN Debugging
-# CIFAR-10 Classification Project
-# ============================================================
-# HOW TO USE:
-#   1. Upload this file to Google Colab
-#   2. Go to Runtime > Change runtime type > GPU
-#   3. Run all cells (Runtime > Run all)
-#   4. Plots will auto-save to your Colab session
-# ============================================================
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
