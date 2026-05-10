@@ -1,17 +1,3 @@
-# ============================================================
-# TASK 5: Hybrid CNN + MLP Network (Creativity Task)
-#
-# Architecture: CNN Feature Extractor → MLP Classifier
-#
-# Intuition:
-#   The CNN layers scan the image for local patterns (edges,
-#   textures, shapes) — this is what CNNs are great at.
-#   Instead of a single linear head, we feed those features
-#   into a proper MLP (multiple layers + activations) that
-#   learns richer decision boundaries. Think of it as:
-#   CNN = "sees the world", MLP = "thinks about what it sees".
-# ============================================================
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
