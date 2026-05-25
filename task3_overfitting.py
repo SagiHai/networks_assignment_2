@@ -237,3 +237,50 @@ plt.show()
 print("Saved: task3_overfitting.png")
 
 print("\nDone! All Task 3 figures saved.")
+
+class SmallCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 16, 3, padding=1)
+        self.conv2 = nn.Conv2d(16, 32, 3, padding=1)
+        self.fc1   = nn.Linear(32 * 8 * 8, 256)
+        self.fc2   = nn.Linear(256, 10)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x)); x = F.max_pool2d(x, 2)
+        x = F.relu(self.conv2(x)); x = F.max_pool2d(x, 2)
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x))
+        return self.fc2(x)
+
+print("\n" + "="*55)
+print("TRAINING: SmallCNN (should NOT overfit)")
+print("="*55)
+small_model = SmallCNN().to(device)
+small_history, _ = run_training(small_model, NUM_EPOCHS, label="SmallCNN")
+
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+epochs_small = range(1, len(small_history['train_loss']) + 1)
+epochs_big   = range(1, len(base_history['train_loss']) + 1)
+
+axes[0].plot(epochs_big,   base_history['train_loss'],  'b-',  label='BigCNN Train')
+axes[0].plot(epochs_big,   base_history['val_loss'],    'b--', label='BigCNN Val')
+axes[0].plot(epochs_small, small_history['train_loss'], 'r-',  label='SmallCNN Train')
+axes[0].plot(epochs_small, small_history['val_loss'],   'r--', label='SmallCNN Val')
+axes[0].set_title('Small vs Big Model: Loss')
+axes[0].set_xlabel('Epoch'); axes[0].set_ylabel('Loss')
+axes[0].legend(); axes[0].grid(True)
+
+axes[1].plot(epochs_big,   base_history['train_acc'],  'b-',  label='BigCNN Train')
+axes[1].plot(epochs_big,   base_history['val_acc'],    'b--', label='BigCNN Val')
+axes[1].plot(epochs_small, small_history['train_acc'], 'r-',  label='SmallCNN Train')
+axes[1].plot(epochs_small, small_history['val_acc'],   'r--', label='SmallCNN Val')
+axes[1].set_title('Small vs Big Model: Accuracy')
+axes[1].set_xlabel('Epoch'); axes[1].set_ylabel('Accuracy (%)')
+axes[1].legend(); axes[1].grid(True)
+
+plt.suptitle('Task 3: Small vs Big Model Comparison', fontsize=14, fontweight='bold')
+plt.tight_layout()
+plt.savefig('task3_small_vs_big.png', dpi=150, bbox_inches='tight')
+plt.show()
+print("Saved: task3_small_vs_big.png")
